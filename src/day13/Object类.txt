@@ -1,0 +1,50 @@
+Object类
+Java中常用的包
+
+java.lang包  - 该包是java语言的核心包，该包重的所有内容由Java虚拟机自动导入;
+            - 如：java.lang.String 类/System类等.......
+
+java.util包 - 该包是java语言的工具包，里面提供了大量的工具类和集合等内容。
+            - 如：java.util.Scanner类/Random类、Arrays类等....
+
+
+java.io包    -  该包是java语言的输入输出包，里面提供了大量读写文件的相关类。
+            -  如：java.io.PrintStream/InputStream
+
+
+java.net包   -  该包是java语言的网络包，里面提供了大量网络通信相关的类的内容。
+            - 如：java.net.ServerSocket类/Socket类等......
+
+
+java.lang.reflect 包 - 该包是java语言的反射包，里面提供了一些反射相关的类。
+
+
+........
+
+基本概述
+
+java.lang.Object类是所有类层次结构的根类，任何类都是该类的直接/间接子类。
+
+常用的方法
+
+boolean equals(Object obj) - 用于判断调用对象是否与参数对象相同
+    - 该方法默认比较两个对象的地址，与 == 的效果等效
+    - 若希望比较对象的内容，则需要进行方法的重写。
+    - 若该方法重写了，则应该去重写hasCode()方法，为了满足hasCode()常规协定。
+
+
+
+int hashCode() - 用于获取调用对象的哈希码值(内存地址和编号)并返回。
+               - 若两个对象调用equals()方法相等，则各自调用该方法得到的哈希码值值必须相同。
+               - 若两个对象调用equals()方法不同等，则各自调用改方法的结果可以相同。
+                但是最高不相同
+
+String toString() - 用于返回调用对象的字符串表现形式。
+            - 默认返回字符串是： 包名.类型 @ 哈希码的无符号十六进制形式。
+            - 若希望返回其他内容，则需要进行方法的重写。
+            - 当使用print()/println()打印引用变量的时候，会自动调用toString()方法
+            - 当使用字符串和引用变量进行拼接(+)时，会自动调用toString()方法。
+
+
+            可以自动生成toString()方法
+

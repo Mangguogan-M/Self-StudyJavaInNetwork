@@ -1,0 +1,199 @@
+包装类
+基本概述
+
+在某些场合要求所有的数据内容都必须是类类型的对象，而Java语言中有8中基本数据类型声明的遍历都不是对象，
+为了使得这些数据在该场合中能够使用，则需要进行对象化处理，此时就需要借助包装类将变量包装成对象在进行使用。
+
+8个基本数据类型都对应自身的包装类
+
+Integer类型
+java.lang.Integer类是Object类的间接子类，用于包装int类型的数据。
+该类由final关键字修饰，表示该类不能被继承。
+
+(1)常用方法
+    该类重写了Object类的equals()、hashCode()以及toString()方法
+
+    Integer(int value) - 根据参数指定的整数值来构造对象
+    Integer(String s)  - 根据参数指定的字符串来构造对象
+
+
+    int intValue() - 用于获取调用对象中含有的int类型数据并返回。
+                    用于实现将Integer类型拆包为int类型
+
+    static Integer valueOf(int i)  - 根据参数指定的整数来得到对象。
+                                    用于实现将int类型包装成Integer类型 
+
+    static int parseInt(String s)  - 用于将字符串类型的数据转换为int类型的整数(掌握)
+
+装箱和拆箱
+
+由int类型向Integer类型的转换过程，叫做装箱
+由Intger类型向int类型的转换过程，叫做拆箱
+从jdk1.5开始，支持自动装箱和自动拆箱的机制。
+
+自动装箱池
+
+为了提高性能在Integer类的内部提供了自动装箱池，也就是把-128 ~ 127之间的整数提前装箱完毕，若程序中需要
+该范围内的数据则直接从装箱池中获取无需创建新对象。
+
+String
+基本概念
+
+java.lang.String类用于描述字符串，可以描述Java程序中的所有字符串字面值 如 "abc"等.
+该类描述的字符串内容是个常量，一旦创建完毕之后将不能进行更改。
+
+Java为String提供了缓存池机制，当使用双引号定义对象的时候，Java环境首先取字符串缓冲池寻找相同内容的字符串，如果存在
+就直接拿过来应用，如果不存在创建一个新的字符串对象放在缓冲池中。
+
+比如：
+    String s1 = "abc";  - "abc"是个常量，不能更改。
+    s1 = "123";         - 并不是改变“abc”字符串的内容，而是改变引用s1的指向。 
+
+
+
+注意：
+    String s1 = null;   String s1 = "";之间有区别吗？？
+
+    解析：
+        前者表示没有字符串对象，后者表示有字符串对象但是没有内容。
+
+常用的方法
+
+(1)常用的构造方法
+    String() - 使用无参构造方式构造对象
+    String(byte[] bytes)  - 根据参数指定的byte数组来构造对象
+    String(byte[] bytes, int offset, int length)  - 使用参数数组中的一部分来构造对象
+    String(String original)  - 根据参数指定的字符串内容来构造对象
+    String(StringBuffer buffer)  - 根据参数指定的引用来构造对象
+    String(StringBuilder builder)   - 根据参数指定的引用来构造对象
+
+(2)常用的成员方法
+         char charAt(int index)  - 用于返回参数指定下标位置的字符
+         int length()            - 用于返回当前字符串的长度。 
+
+        int compareTo(String anotherString) 
+                - 用于比较调用对象和参数对象的字符串大小关系并返回。
+                - 使用当前字符串中第一个字符起的每一个字符减去参数字符串中对象位置的字符
+                - 若第一个字符不相等则可以代表字符大小的关系，若相等则使用下一个字符继续比较
+                - 若存在的字符都相同，则大小取决于长度。
+
+
+        如：
+            "abc" 和 "bcd"比较大小：由于第一个字符'a'小于'b'，因此字符串"bcd"比较大
+            "abc" 和 "abd" 比较大小：由于前两个字符相等，则第三个字符'c'小于'd'，因此"abd"大
+            "abc" 和 "abcd"比较大小：由于前面字符相等，则大小取决于字符长度，因此“abcd”大
+
+
+        int compareToIgnoreCase(String str)  
+                - 用于比较调用对象和参数对象的字符串大小关系并返回。
+                - 不考虑大小写，也就是'A'和'a'在该方法中认为是相等的关系。
+
+
+        boolean equals(Object anObject) 
+                - 用于比较字符串内容是否相等并返回。
+
+        boolean equalsIgnoreCase(String anotherString) 
+                - 用于比较字符串内容是否相等并返回,不考虑大小写，如：'A'和'a'是相等                  
+
+
+
+    boolean contains(CharSequence s)  - 用于判断调用对象中是否包含参数指定的内容
+                                      - 其中参数是接口类型，因此实参传递有两种方式：
+                                      a.创建实现类的对象作为实参传递，而String类就是该接口的实现类
+                                      b.使用匿名内部类创建接口类型的对象作为实参传递
+
+     boolean endsWith(String suffix)  
+                                - 用于判断当前字符串是否以参数指定的内容为结尾
+
+    boolean startsWith(String prefix)  
+                                - 用于判断当前字符串是否以参数指定的内容为开头
+
+    String toLowerCase()  - 用于将当前字符串中所有的字符转换为小写并返回
+
+
+    String toUpperCase()  -  用于将当前字符串中所有的字符转换为大写并返回
+
+
+    String trim()   - 用于去除当前字符串中两端的空白字符并返回。
+
+
+
+    byte[] getBytes()  - 用于将当前字符串内容转换为byte数组并返回  
+
+    char[] toCharArray()  - 用于将当前字符串内容转换为char数组并返回
+
+
+
+    int indexOf(int ch)     - 用于返回当前字符串中参数 ch指定的字符第一次出现的下标
+
+    int indexOf(int ch, int fromIndex)   - 用于从fromIndex位置开始查询ch指定的字符，若查找失败，则返回  -1
+
+    int indexOf(String str)   - 用于查找参数str指定的字符串并返回下标
+
+    int indexOf(String str, int fromIndex)  - 用于从fromIndex位置开始查找
+
+     int lastIndexOf(int ch)    - 用于返回参数 ch指定的字符最后一次出现的下标
+
+    int lastIndexOf(int ch, int fromIndex)      - 用于从fromIndex位置开始查询ch指定的字符出现的下标，反向搜索的第一次，若查找失败，则返回  -1
+
+     int lastIndexOf(String str)     - 用于返回str指定的字符串并最后一次出现的下标
+
+    int lastIndexOf(String str, int fromIndex)   - 用于从fromIndex位置开始反向搜索的第一次
+
+    String substring(int beginIndex)   - 用于获取当前字符串中从 beginIndex 位置开始的子字符串并返回。
+
+     String substring(int beginIndex, int endIndex)   -  用于获取当前字符串中从beginIndex位置开始到endIndex结尾的子字符串并返回。
+
+
+    boolean matches(String regex)   - 用于判断当前字符串是否满足参数字符串指定的规则。
+
+StringBuffer类和StringBuilder类(查询API手册)
+基本概述
+
+由于String类描述字符序列是不可以改变的，因此描述多个类似的字符串需要单独保存，此时内存空间消耗比较大。
+为了节省内存空间直接对象字符序列本身进行改变，则使用StringBuffer和StringBuilder。
+
+StringBuffer类从jdk1.0开始就存在的，属于线程安全的类，效率比较低。
+StringBuilder类从jdk1.5开始出现，属于非线程安全的类，效率比较高，推荐使用该类。
+
+常用的方法
+
+StringBuilder(String str)  - 根据字符串来构造对象
+    - 初始容量为：16 + 字符串参数的长度
+    - 该类没有重写equals()和hashCode()方法，但是重写了toString() 方法
+
+    int capacity()  - 用于获取当前对象的容量并返回
+    int length()   - 用于返回当前对象的字符个数
+
+
+StringBuilder insert(int offset, String str) - 用于将str插入到当前字符串中offset的位置并返回。
+
+StringBuilder append(String str)   - 用于将str追加到当前字符串的末尾位置
+
+tringBuilder delete(int start, int end)   - 用于从当前字符串中将start到end之间的字符串内容移除。
+
+StringBuilder replace(int start, int end, String str)   - 用于将当前字符串从中start到end之间的字符串用str替换。
+
+StringBuilder reverse() - 用于将当前字符串中的字符序列反转过来 
+
+
+扩容算法：
+使用append追加东西的时候，如果长度超过了字符串存储空间进行扩容，将旧的复制过去。
+
+
+ int newCapacity = (value.length << 1) + 2;
+
+20
+
+0001 0100
+
+0010 1000
+    32  8   
+
+20 * 2
+
+    value.length * 2 + 2
+
+容量扩大两倍+2   
+
+

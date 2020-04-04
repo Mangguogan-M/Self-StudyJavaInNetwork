@@ -1,0 +1,85 @@
+----------------Java反射--------------
+demo1
+	Case1：通过反射获取Class类实例的三种方式
+demo2
+	Case1：获取运行时类实现的接口以及父类
+	Case2：通过反射获取构造方法
+	Case3：通过反射获取成员变量
+	Case4：通过反射获取成员方法
+demo3
+	BeanToBean：反射实战之将JavaBean转JavaBean
+	MapToBean：反射实战之完成Map转JavaBean
+	BeanToMap：反射实战之完成JavaBean转Map
+	
+
+反射常用的一些方法
+	getName()			获取名称
+	getSimpleName() 	获取简称
+	getModifiers()		获取访问修饰符
+	getParameterTypes() 获取参数列表
+
+1.反射获取Class类实例的三种方式：
+	对象.getClass()
+	类名.clsss
+	Class.forName("全限定名")
+	
+	newInstance() 
+          创建此 Class 对象所表示的类的一个新实例。
+         例如：Class<Goods> cls = Goods.class;
+          Goods = cls.newInstance();//调用的是无参构造 
+         
+	第三种和前面两种的区别：
+		前两种必须明确类型。
+		后面是你只要提供这种类型的字符串就行，这种扩展更强，我不需要知道你的类，我只提供字符串，按照配置文件加载就可以了。
+		
+2.获取运行时类实现的接口以及父类
+	(1)获取父类  getSuperclass()
+	(2)获取实现接口 getInterfaces()
+	
+3.通过反射获取构造方法
+	getConstructor(Class<?>... parameterTypes)   获取指定公共构造
+	getConstructors()    					           获取本类所有的公共构造
+	getDeclaredConstructor(Class<?>... parameterTypes)  获取本类指定的构造(共有或私有)
+	getDeclaredConstructors()         					获取本类所有的构造
+	
+创建对象
+	newInstance()
+		con.newInstance(“zhangsan", 20);
+	
+
+		加Declared和不加Declared区别?   加Declared可以获取本类所有的东西，不加Declared获取本类以及父类公共的东西
+		加s和不加s的区别?   加s获取是多个，返回数组。    不加s返回单个。
+		
+4.通过反射获取运行时类中成员变量
+		getFields() 				获取本类以及父类所有的公共属性
+  		getField(String name)       获取本类以及父类中指定的属性(只能获取共有的)
+  		getDeclaredFields() 		获取本类中所有的属性(共有、私有)
+ 		getDeclaredField(String name) 获取本类中指定的属性(私有、共有都可以获取)
+ 		
+ 		常用方法：
+ 			set(Object obj,Object value)
+ 				第一个参数：指定对象
+ 				第二个参数：需要设置的值
+ 			get(Object obj) 返回指定对象上此Field表示的字段的值
+ 				第一个参数：指定的对象
+ 				
+5.通过反射获取成员方法
+
+		getDeclaredMethods() 		获取本类所有的成员方法(共有、私有)
+  		getDeclaredMethod(String name, Class<?>... parameterTypes) 获取本类指定的成员方法(共有、私有) 
+  		getMethods() 			获取本类以及父类所有的公共成员方法
+  		getMethod(String name, Class<?>... parameterTypes)  获取本类以及父类指定的公共方法
+  		
+  		invoke(Object obj, Object... args)
+  			第一个参数：调用那个对象的方法
+  			第二个参数：需要设置的值
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	

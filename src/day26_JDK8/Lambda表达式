@@ -1,0 +1,33 @@
+1.Lambda表达式概述
+	lambda表达式允许你通过表达式来代替功能接口。 lambda表达式就和方法一样,它提供了一个正常的参数列表和一个使用
+	这些参数的主体(body,可以是一个表达式或一个代码块)。
+
+	Lambda表达式还增强了集合库。 Java SE 8添加了2个对集合数据进行批量操作的包: java.util.function 包以及
+	java.util.stream 包。 流(stream)就如同迭代器(iterator),但附加了许多额外的功能。 总的来说,lambda表达
+	式和 stream 是自Java语言添加泛型(Generics)和注解(annotation)以来最大的变化。 
+
+2.Lambda表达式语法格式：
+	基本语法：
+		(parameters) -> expression
+		或
+		(parameters) -> {statements;}
+
+	三部分构成
+	        参数列表
+	        符号 ->
+	        函数体 : 有多个语句,可以用{} 包括, 如果需要返回值且只有一个语句,可以省略 return
+
+	        
+	        
+3.Lambda表达式
+	无参数，无返回值
+	有参数，无返回值
+	有参数，有返回值
+	
+4.Lambdas和Streams
+	Stream是对集合的包装，通常和lambda一起使用。使用lambdas可以支持许多操作，如map,filter,limit,count,min,max,sum,collect等等
+	
+	
+	
+重点：
+	forEach、forEachRemaining
